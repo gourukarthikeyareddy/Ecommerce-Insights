@@ -18,6 +18,33 @@ The dashboard incorporates spatial analytics with a map visualization showing YT
 
 #  
 
+**DAX measure created:** 
+
+YTD Sales = TOTALYTD(SUM(ecommerce_data[sales_per_order]), 'Calender'[Date])
+
+YTD quantity = TOTALYTD(SUM(ecommerce_data[order_quantity]), 'Calender'[Date])
+
+YTD profitmargin = TOTALYTD(ecommerce_data[Profit margin], 'Calender'[Date])
+
+YTD Profit = TOTALYTD(SUM(ecommerce_data[profit_per_order]), 'Calender'[Date])
+
+YoY Sales = ([YTD Sales] - [PYTD Sales])/[PYTD Sales]
+
+YoY Quantity = ([YTD quantity] - [PYTD quantity])/[PYTD quantity]
+
+YoY profitMargin = ([YTD profitmargin] - [PYTD profitMargin])/[PYTD profitMargin]
+
+YoY profit = ([YTD Profit] - [PYTD profit])/[PYTD profit]
+
+SalesTrend_icon = var positive_icon = UNICHAR(9650)
+                var negative_icon = UNICHAR(9660)
+                var result = IF([YoY Sales]>0, positive_icon, negative_icon)
+                return result
+
+Sales Icon color = IF([YoY Sales]>0 , "Green", "Red") 
+
+#  
+
 ![image](https://github.com/user-attachments/assets/d33a5109-8486-43d1-9fd8-4ed77b7a2b0b)
 
 #  
